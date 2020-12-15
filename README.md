@@ -10,5 +10,5 @@ to write this code to obtain the answers to some of the questions in the
 quizzes. The notebooks you'll find in this repo are listed below:
 
 
-* One Parameter Regression Quiz
+* [One Parameter Regression Quiz](https://github.com/mwoitek/advanced-linear-models-1/blob/master/one_parameter_regression_quiz.ipynb)
 * Linear Regression Quiz
