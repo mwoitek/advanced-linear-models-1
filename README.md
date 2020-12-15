@@ -11,4 +11,5 @@ quizzes. The notebooks you'll find in this repo are listed below:
 
 
 * [One Parameter Regression Quiz](https://github.com/mwoitek/advanced-linear-models-1/blob/master/one_parameter_regression_quiz.ipynb)
-* Linear Regression Quiz
+* [Linear Regression Quiz](https://github.com/mwoitek/advanced-linear-models-1/blob/master/linear_regression_quiz.ipynb)
+* [General Least Squares Quiz](https://github.com/mwoitek/)
