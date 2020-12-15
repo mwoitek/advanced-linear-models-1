@@ -1,0 +1,94 @@
+---
+jupyter:
+  jupytext:
+    formats: ipynb,Rmd
+    text_representation:
+      extension: .Rmd
+      format_name: rmarkdown
+      format_version: '1.2'
+      jupytext_version: 1.7.1
+  kernelspec:
+    display_name: R
+    language: R
+    name: ir
+---
+
+
+# Linear Regression Quiz
+
+
+## Imports
+
+
+```{r}
+suppressPackageStartupMessages(library(R.utils))
+```
+
+
+## Question 4
+
+
+```{r}
+# Load the 'mtcars' dataset:
+data(mtcars)
+
+# Print the first 15 rows:
+head(mtcars, 15)
+```
+
+
+```{r}
+# Use the weight (1000 lbs) as the predictor:
+x <- mtcars$wt
+
+# Use the gross horsepower as the outcome:
+y <- mtcars$hp
+```
+
+
+### Solution 1: Using the equations for the regression coefficients
+
+
+```{r}
+# Compute the slope:
+beta_1 <- cov(x, y) / var(x)
+
+# Compute the intercept:
+beta_0 <- mean(y) - beta_1 * mean(x)
+
+# Print the regression coefficients:
+printf("beta_0 = %.2f\n", beta_0)
+printf("beta_1 = %.2f\n", beta_1)
+```
+
+
+```{r}
+# Predict the horsepower for a 3000 pound car:
+wt <- 3
+hp <- beta_1 * wt + beta_0
+printf("hp = %.2f\n", hp)
+```
+
+
+### Solution 2: Using R's built-in functions
+
+
+```{r}
+# Compute the regression coefficients:
+fit <- lm(formula = y ~ x)
+coeffs <- coef(fit)
+beta_r_0 <- coeffs[1]
+beta_r_1 <- coeffs[2]
+
+# Print the regression coefficients:
+printf("beta_0 = %.2f\n", beta_r_0)
+printf("beta_1 = %.2f\n", beta_r_1)
+```
+
+
+```{r}
+# Predict the horsepower for a 3000 pound car:
+hp_r <- predict(fit, data.frame(x = c(3)))
+hp_r <- hp_r[1]
+printf("hp = %.2f\n", hp_r)
+```
