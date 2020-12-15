@@ -1,0 +1,42 @@
+---
+jupyter:
+  jupytext:
+    formats: ipynb,Rmd
+    text_representation:
+      extension: .Rmd
+      format_name: rmarkdown
+      format_version: '1.2'
+      jupytext_version: 1.7.1
+  kernelspec:
+    display_name: R
+    language: R
+    name: ir
+---
+
+# One Parameter Regression Quiz
+
+## Question 5
+
+```{r}
+# Predictor values:
+x <- c(-1.45, 2.28, -1.41, 1.05, -0.61)
+
+# Outcome values:
+y <- c(-1.52, 3.83, -1.90, 1.79, -0.42)
+```
+
+```{r}
+# Compute the inner products:
+
+# Compute the inner product of x and y:
+numerator <- sum(x * y)
+
+# Compute the inner product of x and x:
+denominator <- sum(x * x)
+```
+
+```{r}
+# Compute and print the regression coefficient:
+reg_coeff <- numerator / denominator
+reg_coeff
+```
