@@ -1,0 +1,126 @@
+---
+jupyter:
+  jupytext:
+    formats: ipynb,Rmd
+    text_representation:
+      extension: .Rmd
+      format_name: rmarkdown
+      format_version: '1.2'
+      jupytext_version: 1.7.1
+  kernelspec:
+    display_name: R
+    language: R
+    name: ir
+---
+
+
+# General Least Squares Quiz
+
+
+## Imports
+
+
+```{r}
+suppressPackageStartupMessages(library(R.utils))
+```
+
+
+```{r}
+# Load the 'swiss' dataset:
+data(swiss)
+
+# Print the first 15 rows:
+head(swiss, 15)
+
+# Use 'Fertility' as the outcome:
+y <- swiss$Fertility
+```
+
+
+## Solution 1
+
+
+### Question 7
+
+
+```{r}
+# Predictors:
+x <- data.matrix(swiss[, -1])
+
+# Add an intercept column to the design matrix:
+x <- cbind(1, x)
+```
+
+
+```{r}
+# Compute the regression coefficients by solving the normal equation:
+coeffs <- solve(t(x) %*% x, t(x) %*% y)
+
+# 'Agriculture' coefficient:
+agr_coeff <- coeffs["Agriculture", ]
+printf("Agriculture coefficient = %.3f\n", agr_coeff)
+```
+
+
+### Question 8
+
+
+```{r}
+# New data for the 'Fertility' prediction:
+# Agriculture      =  27.7,
+# Examination      =    22,
+# Education        =    29,
+# Catholic         = 58.33,
+# Infant Mortality =  19.3
+new_data <- c(1, 27.7, 22, 29, 58.33, 19.3)
+
+# Compute the prediction:
+coeffs <- as.vector(coeffs)
+pred <- sum(coeffs * new_data)
+printf("Fertility prediction = %.3f\n", pred)
+```
+
+
+## Solution 2
+
+
+### Question 7
+
+
+```{r}
+# Predictors:
+agr <- swiss$Agriculture
+exa <- swiss$Examination
+edu <- swiss$Education
+cat <- swiss$Catholic
+inf <- swiss$Infant.Mortality
+```
+
+
+```{r}
+# Compute the regression coefficients by using R's built-in functions:
+fit <- lm(formula = y ~ agr + exa + edu + cat + inf)
+coeffs <- coef(fit)
+
+# 'Agriculture' coefficient:
+agr_coeff <- coeffs["agr"]
+printf("Agriculture coefficient = %.3f\n", agr_coeff)
+```
+
+
+### Question 8
+
+
+```{r}
+# New data for the 'Fertility' prediction:
+# Agriculture      =  27.7,
+# Examination      =    22,
+# Education        =    29,
+# Catholic         = 58.33,
+# Infant Mortality =  19.3
+new_data <- data.frame(agr = 27.7, exa = 22, edu = 29, cat = 58.33, inf = 19.3)
+
+# Compute the prediction:
+pred <- predict(fit, new_data)
+printf("Fertility prediction = %.3f\n", pred)
+```
